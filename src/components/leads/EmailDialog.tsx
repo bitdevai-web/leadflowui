@@ -162,7 +162,7 @@ export default function EmailDialog({
 
   return (
     <Modal
-      className="max-w-[780px] p-6 overflow-hidden max-h-[calc(100vh-100px)]"
+      className="max-w-[900px] p-6 overflow-hidden max-h-[85vh]"
       isOpen={isOpen}
       onClose={onClose}
     >

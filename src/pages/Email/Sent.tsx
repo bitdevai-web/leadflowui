@@ -123,7 +123,7 @@ export default function Sent() {
             setModalState(ModalState.EMAIL);
           }}
         >
-          <span className="text-blue-500 fa-solid fa-eye"></span>
+          <span className="text-blue-500 fa-solid fa-envelope" title="View Email Body"></span>
         </div>
       ),
       sortable: true,
@@ -331,8 +331,8 @@ export default function Sent() {
         pageDetails="View all the emails sent to your leads"
         component={<div className="flex flex-row gap-2"></div>}
       />
-      <div className="mb-6">
-        <form className="flex flex-row gap-3 w-full">
+      <div className="mb-4">
+        <form className="flex flex-row gap-2 w-full items-end flex-wrap">
           <Controller
             control={control}
             name="status"
@@ -399,7 +399,7 @@ export default function Sent() {
           </Button>
         </form>
       </div>
-      <div className="space-y-6 w-full overflow-auto">
+      <div className="w-full overflow-auto">
         <DataTable
           responsive
           columns={columns}
@@ -414,6 +414,27 @@ export default function Sent() {
           paginationRowsPerPageOptions={[25, 50, 100, 200]}
           onChangePage={(page) => setPagination({ ...pagination, page })}
           dense
+          customStyles={{
+            rows: {
+              style: {
+                minHeight: '36px',
+                paddingTop: '0',
+                paddingBottom: '0',
+              },
+            },
+            headCells: {
+              style: {
+                paddingTop: '8px',
+                paddingBottom: '8px',
+              },
+            },
+            cells: {
+              style: {
+                paddingTop: '8px',
+                paddingBottom: '8px',
+              },
+            },
+          }}
         />
       </div>
       <Body

@@ -48,6 +48,7 @@ export const leadFilterDefault = {
 };
 export default function SentLead() {
   const [lead, setLead] = useState<null | string>(null);
+  const [generatingLeadId, setGeneratingLeadId] = useState<string | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
   const [toggleClear, setToggleClear] = useState(false);
   const [modalState, setModalState] = useState<ModalState>(ModalState.NONE);
@@ -124,9 +125,15 @@ export default function SentLead() {
       onSuccess(data) {
         toast.success(`Email Generated (${data.time}s)`);
         refetchEmails();
+        // Automatically open the EmailDialog with generated emails
+        if (generatingLeadId) {
+          setLead(generatingLeadId);
+          setGeneratingLeadId(null);
+        }
       },
       onError(err) {
         toast.error(err.message);
+        setGeneratingLeadId(null);
       },
     });
 
@@ -312,8 +319,12 @@ export default function SentLead() {
           </button>
           <button
             title="Generate Email"
-            onClick={() => generatedEmailByLead(row.id)}
+            onClick={() => {
+              setGeneratingLeadId(row.id);
+              generatedEmailByLead(row.id);
+            }}
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-600 hover:bg-brand-100 transition-colors"
+            disabled={isLoadingEmailGeneration}
           >
             <i className="fa-solid fa-bolt text-[11px]"></i> Email
           </button>
@@ -468,6 +479,28 @@ export default function SentLead() {
           }
           paginationRowsPerPageOptions={[25, 50, 100, 200]}
           onChangePage={(page) => setPagination({ ...pagination, page })}
+          dense
+          customStyles={{
+            rows: {
+              style: {
+                minHeight: '36px',
+                paddingTop: '0',
+                paddingBottom: '0',
+              },
+            },
+            headCells: {
+              style: {
+                paddingTop: '8px',
+                paddingBottom: '8px',
+              },
+            },
+            cells: {
+              style: {
+                paddingTop: '8px',
+                paddingBottom: '8px',
+              },
+            },
+          }}
         />
       </div>
       <LeadGen isOpen={modalState == ModalState.LEAD} onClose={handleClose} />

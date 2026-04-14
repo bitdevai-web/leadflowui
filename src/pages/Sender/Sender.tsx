@@ -131,6 +131,28 @@ export default function Sender() {
           }
           paginationRowsPerPageOptions={[25, 50, 100, 200]}
           onChangePage={(page) => setPagination({ ...pagination, page })}
+          dense
+          customStyles={{
+            rows: {
+              style: {
+                minHeight: '36px',
+                paddingTop: '0',
+                paddingBottom: '0',
+              },
+            },
+            headCells: {
+              style: {
+                paddingTop: '8px',
+                paddingBottom: '8px',
+              },
+            },
+            cells: {
+              style: {
+                paddingTop: '8px',
+                paddingBottom: '8px',
+              },
+            },
+          }}
         />
       </div>
       <CreateSender

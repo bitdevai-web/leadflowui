@@ -39,6 +39,11 @@ const navItems: NavItem[] = [
     icon: <i className="fa-solid fa-paper-plane text-[16px]"></i>,
     path: "/senders",
   },
+  {
+    name: "Settings",
+    icon: <i className="fa-solid fa-gear text-[16px]"></i>,
+    path: "/settings",
+  },
 ];
 
 const AppSidebar: React.FC = () => {

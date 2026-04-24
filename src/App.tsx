@@ -21,6 +21,7 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Sender from "./pages/Sender/Sender";
 import Sent from "./pages/Email/Sent";
 import SentLead from "./pages/Leads/SentLead";
+import Settings from "./pages/Settings/Settings";
 import SignIn from "./pages/AuthPages/SignIn";
 import SignUp from "./pages/AuthPages/SignUp";
 import { Toaster } from "react-hot-toast";
@@ -44,6 +45,7 @@ export default function App() {
             <Route path="/leads/sent-emails" element={<SentLead />} />
             <Route path="/leads/responded" element={<RespondedLead />} />
             <Route path="/senders" element={<Sender />} />
+            <Route path="/settings" element={<Settings />} />
 
             <Route index path="/" element={<Home />} />
 

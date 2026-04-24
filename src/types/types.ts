@@ -272,6 +272,17 @@ export interface CountryWiseLeads {
 }
 
 export type StatusWiseEmails = Record<BrevoEvent, number>;
+
+export interface ISetting {
+  key: string;
+  value: string;
+  description: string | null;
+}
+
+export interface ISettingResponse {
+  data: ISetting[];
+}
+
 export type ZohoExportResponse = {
   message: string;
   status: boolean;

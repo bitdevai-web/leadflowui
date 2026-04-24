@@ -26,11 +26,13 @@ export default {
   ZOHO_TOKEN: `${BASE_URL}/auth/zoho`,
   ZOHO_EXPORT: `${BASE_URL}/leads/export/zoho`,
   ZOHO_AUTH: `https://accounts.zoho.com/oauth/v2/auth?scope=AaaServer.profile.Read,ZohoCRM.modules.ALL&client_id=${ZOHO_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${getAuthRedirectionUrl()}`,
+  SETTINGS: `${BASE_URL}/settings`,
+  SETTING: (key: string) => `${BASE_URL}/settings/${key}`,
 };
 
 function getBase() {
   const hostname = window.location.hostname;
-
+  return `https://pyhost.mydevfactory.com/leadflow/api/v1`
   if (hostname.includes("localhost")) {
     return "http://localhost:8000/api/v1";
   } else if (hostname.includes("staging")) {

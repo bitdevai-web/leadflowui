@@ -18,6 +18,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import Button from "../../components/ui/button/Button";
 import EmailDialog from "../../components/leads/EmailDialog";
 import { EmailGenerated } from "../../components/leads/EmailGenerated";
+import ComboInput, { DESIGNATION_SUGGESTIONS } from "../../components/form/input/ComboInput";
 import Input from "../../components/form/input/InputField";
 import LeadGen from "../../components/leads/LeadGen";
 import Loading from "../../components/leads/Loading";
@@ -27,6 +28,7 @@ import Select from "../../components/form/Select";
 import { Status } from "../../components/leads/Status";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import countryList from "../../data/country";
 import { MOCK_SENT_LEADS, MOCK_TAGS } from "../../data/mockData";
 
 enum ModalState {
@@ -216,6 +218,8 @@ export default function SentLead() {
       })),
     [tags]
   );
+
+  const countryNames = useMemo(() => countryList.map((c) => c.name), []);
 
   // Memoized CSV generation logic for better performance
   const csvHeaders = useMemo(
@@ -446,8 +450,8 @@ export default function SentLead() {
             )} />
             <Controller control={control} name="company" render={({ field }) => <Input placeholder="Organization" size="sm" {...field} />} />
             <Controller control={control} name="category" render={({ field }) => <Select placeholder="Industry" options={options} {...field} />} />
-            <Controller control={control} name="country" render={({ field }) => <Input placeholder="Country" size="sm" {...field} />} />
-            <Controller control={control} name="designation" render={({ field }) => <Input placeholder="Designation" size="sm" {...field} />} />
+            <Controller control={control} name="country" render={({ field }) => <ComboInput value={field.value} onChange={field.onChange} suggestions={countryNames} placeholder="Country" />} />
+            <Controller control={control} name="designation" render={({ field }) => <ComboInput value={field.value} onChange={field.onChange} suggestions={DESIGNATION_SUGGESTIONS} placeholder="Designation" />} />
             <Controller control={control} name="created_at" render={({ field }) => <Input placeholder="Date" type="date" size="sm" {...field} />} />
             <Button type="button" onClick={() => refetch()} size="sm" className="col-span-1">
               <i className="fa-solid fa-filter"></i>
